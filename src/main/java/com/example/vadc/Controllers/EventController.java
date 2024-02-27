@@ -30,4 +30,16 @@ public class EventController {
     {
         return eventServiceImpl.getTotalClients();
     }
+
+    @GetMapping("/getTotalCandidates")
+    public Integer getTotalCandidates()
+    {
+        return eventServiceImpl.getTotalCandidates();
+    }
+
+    @GetMapping("/getAssessorsCount")
+    public Integer getAssessorsCount()
+    {
+        return eventServiceImpl.getAssessorsCount();
+    }
 }

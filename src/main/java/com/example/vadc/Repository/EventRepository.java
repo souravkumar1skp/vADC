@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface EventRepository extends JpaRepository<EventMaster, Integer> {
@@ -15,6 +16,17 @@ public interface EventRepository extends JpaRepository<EventMaster, Integer> {
     Long getCount();
     @Query(value = "select status,count(*) from event_master group by status", nativeQuery = true)
     List<Object> getStatus();
-    @Query(value = "select * from mettl_client", nativeQuery = true)
+    @Query(value = "select count(*) from mettl_client", nativeQuery = true)
     Integer getTotalClients();
+    @Query(value = "with my_cte as (\n" +
+            "\tselect distinct candidate_id from candidate_event_mapping\n" +
+            ")\n" +
+            "select count(*) from my_cte", nativeQuery = true)
+    Integer getCountOfCandidates();
+    @Query(value = "with my_cte as (\n" +
+            "\tselect distinct assessor_email from candidate_assessor_mapping\n" +
+            ")\n" +
+            "\n" +
+            "select count(*) from my_cte", nativeQuery = true)
+    Integer getTotalCount();
 }

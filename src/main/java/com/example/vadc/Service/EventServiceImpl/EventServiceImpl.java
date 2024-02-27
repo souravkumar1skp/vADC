@@ -24,7 +24,7 @@ public class EventServiceImpl implements EventService {
         dto.setCountOfEvents(res);
         return dto;
     }
-
+    @Override
     public List<EventStatusDto> getEventStatusService()
     {
         List<Object> data= eventRepository.getStatus();
@@ -40,9 +40,19 @@ public class EventServiceImpl implements EventService {
         }
         return ldto;
     }
-
+    @Override
     public Integer getTotalClients()
     {
         return eventRepository.getTotalClients();
+    }
+
+    public Integer getTotalCandidates()
+    {
+        return eventRepository.getCountOfCandidates();
+    }
+
+    public Integer getAssessorsCount()
+    {
+        return eventRepository.getTotalCount();
     }
 }
