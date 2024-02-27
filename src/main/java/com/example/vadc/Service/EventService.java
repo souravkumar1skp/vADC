@@ -6,7 +6,7 @@ import com.example.vadc.Dto.EventStatusDto;
 import java.util.List;
 
 public interface EventService {
-    abstract EventDto getAllEventService();
-    abstract List<EventStatusDto> getEventStatusService();
-    abstract Integer getTotalClients();
+     EventDto getAllEventService();
+     List<EventStatusDto> getEventStatusService();
+     Integer getTotalClients();
 }
