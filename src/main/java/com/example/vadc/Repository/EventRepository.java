@@ -1,14 +1,11 @@
 package com.example.vadc.Repository;
 
-import com.example.vadc.Dto.EventDto;
-import com.example.vadc.Dto.EventStatusDto;
 import com.example.vadc.Model.EventMaster;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public interface EventRepository extends JpaRepository<EventMaster, Integer> {

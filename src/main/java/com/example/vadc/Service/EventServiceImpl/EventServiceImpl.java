@@ -2,7 +2,6 @@ package com.example.vadc.Service.EventServiceImpl;
 
 import com.example.vadc.Dto.EventDto;
 import com.example.vadc.Dto.EventStatusDto;
-import com.example.vadc.Model.EventMaster;
 import com.example.vadc.Repository.EventRepository;
 import com.example.vadc.Service.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
