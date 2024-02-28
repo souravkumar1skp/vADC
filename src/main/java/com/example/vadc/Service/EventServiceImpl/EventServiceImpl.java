@@ -33,6 +33,10 @@ public class EventServiceImpl implements EventService {
             Object status= ((Object[]) row)[0];
             Object value= ((Object[]) row)[1];
             EventStatusDto dto= new EventStatusDto();
+            if (status.toString().equals("FINISHED")) {
+                dto.setStatus("COMPLETED");
+            }
+            else
             dto.setStatus(status.toString());
             dto.setValue(value.hashCode());
             ldto.add(dto);
