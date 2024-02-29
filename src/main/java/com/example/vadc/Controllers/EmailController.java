@@ -1,6 +1,7 @@
 package com.example.vadc.Controllers;
 
 import com.example.vadc.Dto.EmailDto;
+import com.example.vadc.Dto.EventStatusDto;
 import com.example.vadc.Service.EventServiceImpl.EmailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,5 +18,11 @@ public class EmailController {
     public List<EmailDto> getEmailStatus()
     {
         return emailServiceImpl.getEmailStatus();
+    }
+
+    @GetMapping("/getCandidateTaskStatus")
+    public List<EventStatusDto> getCandidateTaskStatus()
+    {
+        return emailServiceImpl.CandidateTaskStatusService();
     }
 }

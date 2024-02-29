@@ -15,10 +15,7 @@ public interface EventRepository extends JpaRepository<EventMaster, Integer> {
     List<Object> getStatus();
     @Query(value = "select count(*) from mettl_client", nativeQuery = true)
     Integer getTotalClients();
-    @Query(value = "with my_cte as (\n" +
-            "\tselect distinct candidate_id from candidate_event_mapping\n" +
-            ")\n" +
-            "select count(*) from my_cte", nativeQuery = true)
+    @Query(value = "select count(*) from candidate_master", nativeQuery = true)
     Integer getCountOfCandidates();
     @Query(value = "with my_cte as (\n" +
             "\tselect distinct assessor_email from candidate_assessor_mapping\n" +

@@ -1,6 +1,8 @@
 package com.example.vadc.Service.EventServiceImpl;
 
 import com.example.vadc.Dto.EmailDto;
+import com.example.vadc.Dto.EventDto;
+import com.example.vadc.Dto.EventStatusDto;
 import com.example.vadc.Model.EventMaster;
 import com.example.vadc.Repository.EmailRepository;
 import com.example.vadc.Service.EmailService;
@@ -31,6 +33,22 @@ public class EmailServiceImpl implements EmailService {
 
             ldto.add(dto);
         }
+        return ldto;
+    }
+    @Override
+    public List<EventStatusDto> CandidateTaskStatusService()
+    {
+        Object data= emailRepository.getCandidateTaskStatus();
+        EventStatusDto dto= new EventStatusDto();
+        List<EventStatusDto> ldto= new ArrayList<>();
+        dto.setStatus("Completed");
+        dto.setValue(((Object[]) data)[0].hashCode());
+        ldto.add(dto);
+
+        EventStatusDto dto_2= new EventStatusDto();
+        dto_2.setStatus("Total");
+        dto_2.setValue(((Object[]) data)[1].hashCode());
+        ldto.add(dto_2);
         return ldto;
     }
 }
