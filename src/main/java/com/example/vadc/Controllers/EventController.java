@@ -1,5 +1,6 @@
 package com.example.vadc.Controllers;
 
+import com.example.vadc.Dto.EmailDto;
 import com.example.vadc.Dto.EventDto;
 import com.example.vadc.Dto.EventStatusDto;
 import com.example.vadc.Service.EventServiceImpl.EventServiceImpl;
