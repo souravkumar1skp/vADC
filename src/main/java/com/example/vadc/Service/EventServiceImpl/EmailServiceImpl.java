@@ -51,4 +51,21 @@ public class EmailServiceImpl implements EmailService {
         ldto.add(dto_2);
         return ldto;
     }
+
+    @Override
+    public List<EventStatusDto> AssessorTaskStatusService()
+    {
+        Object data= emailRepository.getAssessorTaskStatus();
+        EventStatusDto dto= new EventStatusDto();
+        List<EventStatusDto> ldto= new ArrayList<>();
+        dto.setStatus("Completed");
+        dto.setValue(((Object[]) data)[0].hashCode());
+        ldto.add(dto);
+
+        EventStatusDto dto_2= new EventStatusDto();
+        dto_2.setStatus("Total");
+        dto_2.setValue(((Object[]) data)[1].hashCode());
+        ldto.add(dto_2);
+        return ldto;
+    }
 }

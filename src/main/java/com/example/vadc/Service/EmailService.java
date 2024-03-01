@@ -8,4 +8,5 @@ import java.util.List;
 public interface EmailService {
     List<EmailDto> getEmailStatus();
     List<EventStatusDto> CandidateTaskStatusService();
+    List<EventStatusDto> AssessorTaskStatusService();
 }

@@ -17,4 +17,10 @@ public interface EmailRepository extends JpaRepository<EventMaster, Integer> {
             ")\n" +
             "select * , (select count(*) from candidate_event_mapping) as total from my_cte", nativeQuery = true)
     Object getCandidateTaskStatus();
+
+    @Query(value = "with my_cte as (\n" +
+            "            select count(*) as completed from candidate_assessor_mapping where assessor_status= 'COMPLETED'\n" +
+            ")\n" +
+            "select * , (select count(*) from candidate_assessor_mapping) as total from my_cte", nativeQuery = true)
+    Object getAssessorTaskStatus();
 }

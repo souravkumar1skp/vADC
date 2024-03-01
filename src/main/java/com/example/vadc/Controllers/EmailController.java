@@ -4,11 +4,12 @@ import com.example.vadc.Dto.EmailDto;
 import com.example.vadc.Dto.EventStatusDto;
 import com.example.vadc.Service.EventServiceImpl.EmailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-
+@CrossOrigin
 @RestController
 public class EmailController {
     @Autowired
@@ -24,5 +25,11 @@ public class EmailController {
     public List<EventStatusDto> getCandidateTaskStatus()
     {
         return emailServiceImpl.CandidateTaskStatusService();
+    }
+
+    @GetMapping("/getAssessorTaskStatus")
+    public List<EventStatusDto> getAssessorTaskStatus()
+    {
+        return emailServiceImpl.AssessorTaskStatusService();
     }
 }
