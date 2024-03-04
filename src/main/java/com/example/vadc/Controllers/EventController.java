@@ -44,4 +44,10 @@ public class EventController {
     {
         return eventServiceImpl.getAssessorsCount();
     }
+
+    @GetMapping("/getTaskStatus")
+    public List<EventStatusDto> getTaskStatus()
+    {
+        return eventServiceImpl.getTaskCompletionStatusService();
+    }
 }

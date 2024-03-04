@@ -23,4 +23,10 @@ public interface EventRepository extends JpaRepository<EventMaster, Integer> {
             "\n" +
             "select count(*) from my_cte", nativeQuery = true)
     Integer getTotalCount();
+
+    @Query(value = "SELECT TO_CHAR(TIMESTAMP 'epoch' + completed_on * INTERVAL '1 millisecond', 'Month') AS months, count(*)\n" +
+            "FROM candidate_task_mapping\n" +
+            "WHERE completed_on IS NOT NULL\n" +
+            "GROUP BY months;", nativeQuery = true)
+    List<Object> getCountByMonth();
 }

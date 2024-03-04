@@ -48,14 +48,31 @@ public class EventServiceImpl implements EventService {
     {
         return eventRepository.getTotalClients();
     }
-
+    @Override
     public Integer getTotalCandidates()
     {
         return eventRepository.getCountOfCandidates();
     }
-
+    @Override
     public Integer getAssessorsCount()
     {
         return eventRepository.getTotalCount();
+    }
+
+    @Override
+    public List<EventStatusDto> getTaskCompletionStatusService()
+    {
+        List<Object> data= eventRepository.getCountByMonth();
+        List<EventStatusDto> ldto= new ArrayList<>();
+        for(Object row: data)
+        {
+            Object status= ((Object[]) row)[0];
+            Object value= ((Object[]) row)[1];
+            EventStatusDto dto= new EventStatusDto();
+            dto.setStatus(status.toString());
+            dto.setValue(value.hashCode());
+            ldto.add(dto);
+        }
+        return ldto;
     }
 }

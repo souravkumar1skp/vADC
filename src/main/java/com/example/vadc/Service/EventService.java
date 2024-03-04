@@ -9,4 +9,7 @@ public interface EventService {
      EventDto getAllEventService();
      List<EventStatusDto> getEventStatusService();
      Integer getTotalClients();
+     Integer getTotalCandidates();
+     Integer getAssessorsCount();
+     List<EventStatusDto> getTaskCompletionStatusService();
 }
