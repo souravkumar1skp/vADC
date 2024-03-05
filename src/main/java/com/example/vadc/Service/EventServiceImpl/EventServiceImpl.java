@@ -16,9 +16,9 @@ public class EventServiceImpl implements EventService {
     private EventRepository eventRepository;
 
     @Override
-    public EventDto getAllEventService()
+    public EventDto getAllEventService(Long startDate, Long endDate)
     {
-        Long res= eventRepository.getCount();
+        Long res= eventRepository.getCount(startDate, endDate);
         EventDto dto= new EventDto();
         dto.setCountOfEvents(res);
         return dto;
