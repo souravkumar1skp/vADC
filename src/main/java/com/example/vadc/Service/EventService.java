@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface EventService {
      EventDto getAllEventService(Long startDate, Long endDate);
-     List<EventStatusDto> getEventStatusService();
-     Integer getTotalClients();
-     Integer getTotalCandidates();
-     Integer getAssessorsCount();
+     List<EventStatusDto> getEventStatusService(Long startDate, Long endDate);
+     Integer getTotalClients(Long startDate, Long endDate);
+     Integer getTotalCandidates(Long startDate, Long endDate);
+     Integer getAssessorsCount(Long startDate, Long endDate);
      List<EventStatusDto> getTaskCompletionStatusService();
 }

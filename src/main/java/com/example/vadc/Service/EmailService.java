@@ -6,7 +6,7 @@ import com.example.vadc.Dto.EventStatusDto;
 import java.util.List;
 
 public interface EmailService {
-    List<EmailDto> getEmailStatus();
+    List<EmailDto> getEmailStatus(Long startDate, Long endDate);
     List<EventStatusDto> CandidateTaskStatusService();
-    List<EventStatusDto> AssessorTaskStatusService();
+    List<EventStatusDto> AssessorTaskStatusService(Long startDate, Long endDate);
 }

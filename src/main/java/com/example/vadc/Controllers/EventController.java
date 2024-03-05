@@ -22,27 +22,27 @@ public class EventController {
     }
 
     @GetMapping("/getAllEventsStatus")
-    public List<EventStatusDto> getAllEventsStatus()
+    public List<EventStatusDto> getAllEventsStatus(@RequestParam(name = "startDate", defaultValue = "0") Long startDate, @RequestParam(name = "endDate", defaultValue = "" + Long.MAX_VALUE) Long endDate)
     {
-        return eventServiceImpl.getEventStatusService();
+        return eventServiceImpl.getEventStatusService(startDate, endDate);
     }
 
     @GetMapping("/getTotalClients")
-    public Integer getTotalClients()
+    public Integer getTotalClients(@RequestParam(name = "startDate", defaultValue = "0") Long startDate, @RequestParam(name = "endDate", defaultValue = "" + Long.MAX_VALUE) Long endDate)
     {
-        return eventServiceImpl.getTotalClients();
+        return eventServiceImpl.getTotalClients(startDate, endDate);
     }
 
     @GetMapping("/getTotalCandidates")
-    public Integer getTotalCandidates()
+    public Integer getTotalCandidates(@RequestParam(name = "startDate", defaultValue = "0") Long startDate, @RequestParam(name = "endDate", defaultValue = "" + Long.MAX_VALUE) Long endDate)
     {
-        return eventServiceImpl.getTotalCandidates();
+        return eventServiceImpl.getTotalCandidates(startDate, endDate);
     }
 
     @GetMapping("/getAssessorsCount")
-    public Integer getAssessorsCount()
+    public Integer getAssessorsCount(@RequestParam(name = "startDate", defaultValue = "0") Long startDate, @RequestParam(name = "endDate", defaultValue = "" + Long.MAX_VALUE) Long endDate)
     {
-        return eventServiceImpl.getAssessorsCount();
+        return eventServiceImpl.getAssessorsCount(startDate, endDate);
     }
 
     @GetMapping("/getTaskStatus")

@@ -24,9 +24,9 @@ public class EventServiceImpl implements EventService {
         return dto;
     }
     @Override
-    public List<EventStatusDto> getEventStatusService()
+    public List<EventStatusDto> getEventStatusService(Long startDate, Long endDate)
     {
-        List<Object> data= eventRepository.getStatus();
+        List<Object> data= eventRepository.getStatus(startDate, endDate);
         List<EventStatusDto> ldto= new ArrayList<>();
         for(Object row: data)
         {
@@ -44,19 +44,19 @@ public class EventServiceImpl implements EventService {
         return ldto;
     }
     @Override
-    public Integer getTotalClients()
+    public Integer getTotalClients(Long startDate, Long endDate)
     {
-        return eventRepository.getTotalClients();
+        return eventRepository.getTotalClient(startDate, endDate);
     }
     @Override
-    public Integer getTotalCandidates()
+    public Integer getTotalCandidates(Long startDate, Long endDate)
     {
-        return eventRepository.getCountOfCandidates();
+        return eventRepository.getCountOfCandidates(startDate, endDate);
     }
     @Override
-    public Integer getAssessorsCount()
+    public Integer getAssessorsCount(Long startDate, Long endDate)
     {
-        return eventRepository.getTotalCount();
+        return eventRepository.getTotalCount(startDate, endDate);
     }
 
     @Override

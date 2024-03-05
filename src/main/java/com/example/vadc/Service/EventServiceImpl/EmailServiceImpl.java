@@ -18,9 +18,9 @@ public class EmailServiceImpl implements EmailService {
     private EmailRepository emailRepository;
 
     @Override
-    public List<EmailDto> getEmailStatus()
+    public List<EmailDto> getEmailStatus(Long startDate, Long endDate)
     {
-        List<Object> data= emailRepository.getStatus();
+        List<Object> data= emailRepository.getStatus(startDate, endDate);
         List<EmailDto> ldto= new ArrayList<>();
         for(Object row: data)
         {
@@ -53,9 +53,9 @@ public class EmailServiceImpl implements EmailService {
     }
 
     @Override
-    public List<EventStatusDto> AssessorTaskStatusService()
+    public List<EventStatusDto> AssessorTaskStatusService(Long startDate, Long endDate)
     {
-        Object data= emailRepository.getAssessorTaskStatus();
+        Object data= emailRepository.getAssessorTaskStatus(startDate, endDate);
         EventStatusDto dto= new EventStatusDto();
         List<EventStatusDto> ldto= new ArrayList<>();
         dto.setStatus("Completed");
