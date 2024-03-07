@@ -1,5 +1,6 @@
 package com.example.vadc.Service.EventServiceImpl;
 
+import ch.qos.logback.core.net.server.Client;
 import com.example.vadc.Dto.FinalMonitorDTO;
 import com.example.vadc.Dto.MonitorDto;
 import com.example.vadc.Repository.MonitorRepository;
@@ -19,15 +20,13 @@ public class MonitorServiceImpl implements MonitorService {
     @Autowired
     private MonitorRepository monitorRepository;
 
-    public FinalMonitorDTO CandidateMonitorService(Integer pageNumber, Integer pageSize)
+    public FinalMonitorDTO CandidateMonitorService(Integer pageNumber, Integer pageSize, String email, String Client, String eventName, Long eventId, Long startDate, Long endDate)
     {
         Pageable p= PageRequest.of(pageNumber, pageSize);
-        List<Object> data= monitorRepository.CandidateMonitor();
+        List<Object> data= monitorRepository.CandidateMonitor(email,Client,eventName,eventId,startDate,endDate);
         int start = (int) p.getOffset();
         int end = Math.min((start + p.getPageSize()), data.size());
-
         Page<Object> monitorPage = new PageImpl<>(data.subList(start, end), p, data.size());
-//        System.out.println(monitorPage.getTotalPages());
         List<MonitorDto> ldto= new ArrayList<>();
         for (Object row : monitorPage) {
             MonitorDto dto = new MonitorDto();
@@ -88,7 +87,6 @@ public class MonitorServiceImpl implements MonitorService {
         fdto.setPageNumber(pageNumber);
         fdto.setTotalCount(monitorPage.getTotalPages());
         fdto.setMonitorDtoList(ldto);
-        System.out.println(ldto);
         return fdto;
     }
 

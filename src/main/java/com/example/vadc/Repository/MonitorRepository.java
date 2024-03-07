@@ -22,6 +22,7 @@ public interface MonitorRepository extends JpaRepository<EventMaster, Integer> {
             "select cm.id as candidate_id, cm.first_name, cm.last_name, cm.email, ctm.event_id from candidate_task_mapping as ctm inner join candidate_master as cm on ctm.candidate_id=cm.id\n" +
             ")\n" +
             "\n" +
-            "select * from cte3 inner join cte2 on cte3.event_id=cte2.id order by candidate_id", nativeQuery = true)
-    List<Object> CandidateMonitor();
+            "select * from cte3 inner join cte2 on cte3.event_id=cte2.id where (:email IS NULL OR email = :email) AND (:Client IS NULL OR client_email = :Client)" +
+            "AND (:eventName IS NULL OR event_name = :eventName) AND (:eventId IS NULL OR event_id = :eventId) AND (:startDate IS NULL OR start_date = :startDate) AND (:endDate IS NULL OR end_date = :endDate)", nativeQuery = true)
+    List<Object> CandidateMonitor(String email, String Client, String eventName, Long eventId, Long startDate, Long endDate);
 }
