@@ -1,5 +1,6 @@
 package com.example.vadc.Controllers;
 
+import com.example.vadc.Dto.FinalMonitorDTO;
 import com.example.vadc.Dto.MonitorDto;
 import com.example.vadc.Service.EventServiceImpl.MonitorServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +20,9 @@ public class MonitorController {
     private MonitorServiceImpl monitorServiceImpl;
 
     @GetMapping("/MonitorCandidate")
-    public ResponseEntity<Page<Object>> MonitorCandidate(@RequestParam(name = "pageNumber", defaultValue = "0") Integer pageNumber)
+    public ResponseEntity<FinalMonitorDTO> MonitorCandidate(@RequestParam(name = "pageNumber", defaultValue = "0") Integer pageNumber)
     {
-        Page<Object> data=monitorServiceImpl.CandidateMonitorService(pageNumber,10);
+        FinalMonitorDTO data=monitorServiceImpl.CandidateMonitorService(pageNumber,10);
         return ResponseEntity.ok(data);
     }
 }
