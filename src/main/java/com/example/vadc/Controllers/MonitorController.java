@@ -3,6 +3,7 @@ package com.example.vadc.Controllers;
 import com.example.vadc.Dto.MonitorDto;
 import com.example.vadc.Service.EventServiceImpl.MonitorServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,9 +19,9 @@ public class MonitorController {
     private MonitorServiceImpl monitorServiceImpl;
 
     @GetMapping("/MonitorCandidate")
-    public ResponseEntity<List<MonitorDto>> MonitorCandidate(@RequestParam(name = "pageNumber", defaultValue = "0") Integer pageNumber)
+    public ResponseEntity<Page<Object>> MonitorCandidate(@RequestParam(name = "pageNumber", defaultValue = "0") Integer pageNumber)
     {
-        List<MonitorDto> data=monitorServiceImpl.CandidateMonitorService(pageNumber,15);
+        Page<Object> data=monitorServiceImpl.CandidateMonitorService(pageNumber,10);
         return ResponseEntity.ok(data);
     }
 }

@@ -25,5 +25,5 @@ public interface MonitorRepository extends JpaRepository<EventMaster, Integer> {
             ")\n" +
             "\n" +
             "select * from cte3 inner join cte2 on cte3.event_id=cte2.id order by candidate_id", nativeQuery = true)
-    List<Object> CandidateMonitor(Pageable p);
+    List<Object> CandidateMonitor();
 }
