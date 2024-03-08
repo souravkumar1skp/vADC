@@ -22,6 +22,10 @@ public class MonitorServiceImpl implements MonitorService {
     @Override
     public FinalMonitorDTO CandidateMonitorService(Integer pageNumber, Integer pageSize, String email, String Client, String eventName, Long eventId, Long startDate, Long endDate)
     {
+        if(email.isEmpty()) email=null;
+        if(Client.isEmpty()) Client=null;
+        if(eventName.isEmpty()) eventName=null;
+
         Pageable p= PageRequest.of(pageNumber, pageSize);
         List<Object> data= monitorRepository.CandidateMonitor(email,Client,eventName,eventId,startDate,endDate);
         int start = (int) p.getOffset();
