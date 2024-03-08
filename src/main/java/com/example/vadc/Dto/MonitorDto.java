@@ -4,7 +4,10 @@ import lombok.Data;
 
 @Data
 public class MonitorDto {
-    private Integer Candidate_id;
+    private Integer CandidateId;
+    private String taskType;
+    private Long cid;
+    private String interviewId;
     private String firstName;
     private String lastName;
     private String email;
@@ -20,5 +23,4 @@ public class MonitorDto {
     private String status;
     private String taskName;
     private String modeType;
-    private String uuid;
 }

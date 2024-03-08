@@ -19,7 +19,7 @@ import java.util.List;
 public class MonitorServiceImpl implements MonitorService {
     @Autowired
     private MonitorRepository monitorRepository;
-
+    @Override
     public FinalMonitorDTO CandidateMonitorService(Integer pageNumber, Integer pageSize, String email, String Client, String eventName, Long eventId, Long startDate, Long endDate)
     {
         Pageable p= PageRequest.of(pageNumber, pageSize);
@@ -33,52 +33,61 @@ public class MonitorServiceImpl implements MonitorService {
             Object[] rowData = (Object[]) row;
 
             if (rowData[0] != null) {
-                dto.setCandidate_id(rowData[0].hashCode());
+                dto.setCandidateId(rowData[0].hashCode());
             }
             if (rowData[1] != null) {
-                dto.setFirstName(rowData[1].toString());
+                dto.setTaskType(rowData[1].toString());
             }
             if (rowData[2] != null) {
-                dto.setLastName(rowData[2].toString());
+                dto.setCid((long)rowData[2].hashCode());
             }
             if (rowData[3] != null) {
-                dto.setEmail(rowData[3].toString());
+                dto.setInterviewId(rowData[3].toString());
             }
             if (rowData[4] != null) {
-                dto.setEventId((long) rowData[4].hashCode());
+                dto.setFirstName(rowData[4].toString());
             }
             if (rowData[5] != null) {
-                dto.setId((long) rowData[5].hashCode());
+                dto.setLastName(rowData[5].toString());
             }
             if (rowData[6] != null) {
-                dto.setEventName(rowData[6].toString());
+                dto.setEmail(rowData[6].toString());
             }
             if (rowData[7] != null) {
-                dto.setClientId((long) rowData[7].hashCode());
+                dto.setEventId((long) rowData[7].hashCode());
             }
             if (rowData[8] != null) {
-                dto.setClientName(rowData[8].toString());
+                dto.setId((long) rowData[8].hashCode());
             }
             if (rowData[9] != null) {
-                dto.setClientEmail(rowData[9].toString());
+                dto.setEventName(rowData[9].toString());
             }
             if (rowData[10] != null) {
-                dto.setTaskId((long) rowData[10].hashCode());
+                dto.setClientId((long) rowData[10].hashCode());
             }
             if (rowData[11] != null) {
-                dto.setStartDate((long) rowData[11].hashCode());
+                dto.setClientName(rowData[11].toString());
             }
             if (rowData[12] != null) {
-                dto.setEndDate((long) rowData[12].hashCode());
+                dto.setClientEmail(rowData[12].toString());
             }
             if (rowData[13] != null) {
-                dto.setStatus(rowData[13].toString());
+                dto.setTaskId((long) rowData[13].hashCode());
             }
             if (rowData[14] != null) {
-                dto.setTaskName(rowData[14].toString());
+                dto.setStartDate((long) rowData[14].hashCode());
             }
             if (rowData[15] != null) {
-                dto.setModeType(rowData[15].toString());
+                dto.setEndDate((long) rowData[15].hashCode());
+            }
+            if (rowData[16] != null) {
+                dto.setStatus(rowData[16].toString());
+            }
+            if (rowData[17] != null) {
+                dto.setTaskName(rowData[17].toString());
+            }
+            if (rowData[18] != null) {
+                dto.setModeType(rowData[18].toString());
             }
 
             ldto.add(dto);
