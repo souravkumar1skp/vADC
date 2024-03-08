@@ -98,7 +98,8 @@ public class MonitorServiceImpl implements MonitorService {
         }
         FinalMonitorDTO fdto= new FinalMonitorDTO();
         fdto.setPageNumber(pageNumber);
-        fdto.setTotalCount(monitorPage.getTotalPages());
+        fdto.setTotalPage(monitorPage.getTotalPages());
+        fdto.setTotalElements(monitorPage.getTotalElements());
         fdto.setMonitorDtoList(ldto);
         return fdto;
     }

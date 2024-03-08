@@ -6,6 +6,7 @@ import java.util.List;
 @Data
 public class FinalMonitorDTO {
     int pageNumber;
-    int totalCount;
+    int totalPage;
+    Long totalElements;
     List<MonitorDto> monitorDtoList;
 }
