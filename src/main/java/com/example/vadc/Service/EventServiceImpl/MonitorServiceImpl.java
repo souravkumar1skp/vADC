@@ -39,7 +39,7 @@ public class MonitorServiceImpl implements MonitorService {
                 dto.setTaskType(rowData[1].toString());
             }
             if (rowData[2] != null) {
-                dto.setCid((long)rowData[2].hashCode());
+                dto.setCid(Long.parseLong(rowData[2].toString()));
             }
             if (rowData[3] != null) {
                 dto.setInterviewId(rowData[3].toString());
@@ -57,13 +57,13 @@ public class MonitorServiceImpl implements MonitorService {
                 dto.setEventId((long) rowData[7].hashCode());
             }
             if (rowData[8] != null) {
-                dto.setId((long) rowData[8].hashCode());
+                dto.setId(Long.parseLong(rowData[8].toString()));
             }
             if (rowData[9] != null) {
                 dto.setEventName(rowData[9].toString());
             }
             if (rowData[10] != null) {
-                dto.setClientId((long) rowData[10].hashCode());
+                dto.setClientId(Long.parseLong(rowData[10].toString()));
             }
             if (rowData[11] != null) {
                 dto.setClientName(rowData[11].toString());
@@ -72,13 +72,13 @@ public class MonitorServiceImpl implements MonitorService {
                 dto.setClientEmail(rowData[12].toString());
             }
             if (rowData[13] != null) {
-                dto.setTaskId((long) rowData[13].hashCode());
+                dto.setTaskId(Long.parseLong(rowData[13].toString()));
             }
             if (rowData[14] != null) {
-                dto.setStartDate((long) rowData[14].hashCode());
+                dto.setStartDate(Long.parseLong(rowData[14].toString()));
             }
             if (rowData[15] != null) {
-                dto.setEndDate((long) rowData[15].hashCode());
+                dto.setEndDate(Long.parseLong(rowData[15].toString()));
             }
             if (rowData[16] != null) {
                 dto.setStatus(rowData[16].toString());
