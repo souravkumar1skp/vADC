@@ -4,9 +4,9 @@ import lombok.Data;
 
 import java.util.List;
 @Data
-public class FinalMonitorDTO {
+public class AssessorMonitorDto {
     int pageNumber;
     int totalPage;
     Long totalElements;
-    List<MonitorDto> monitorDtoList;
+    List<AssessorList> assessorDtoList;
 }

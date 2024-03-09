@@ -3,19 +3,18 @@ package com.example.vadc.Dto;
 import lombok.Data;
 
 @Data
-public class MonitorDto {
-    private String email;
-    private String firstName;
-    private String lastName;
+public class AssessorList {
+    private String assessorName;
+    private String assessorEmail;
     private String ClientEmail;
     private Long eventId;
     private String eventName;
-    private String taskName;
-    private String taskType;
+    private String candidateEmail;
     private Long cid;
     private String interviewId;
-    private Integer CandidateId;
     private String status;
     private Long startDate;
     private Long endDate;
+    private String taskName;
+    private String taskType;
 }

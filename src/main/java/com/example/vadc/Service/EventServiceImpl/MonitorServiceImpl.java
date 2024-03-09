@@ -1,7 +1,8 @@
 package com.example.vadc.Service.EventServiceImpl;
 
-import ch.qos.logback.core.net.server.Client;
-import com.example.vadc.Dto.FinalMonitorDTO;
+import com.example.vadc.Dto.AssessorList;
+import com.example.vadc.Dto.AssessorMonitorDto;
+import com.example.vadc.Dto.CandidateMonitorDTO;
 import com.example.vadc.Dto.MonitorDto;
 import com.example.vadc.Repository.MonitorRepository;
 import com.example.vadc.Service.MonitorService;
@@ -20,14 +21,28 @@ public class MonitorServiceImpl implements MonitorService {
     @Autowired
     private MonitorRepository monitorRepository;
     @Override
-    public FinalMonitorDTO CandidateMonitorService(Integer pageNumber, Integer pageSize, String email, String Client, String eventName, Long eventId, Long startDate, Long endDate)
+    public CandidateMonitorDTO CandidateMonitorService(Integer pageNumber, Integer pageSize, String email, String Client, String eventName,String uuid, Long startDate, Long endDate)
     {
         if(email.isEmpty()) email=null;
         if(Client.isEmpty()) Client=null;
         if(eventName.isEmpty()) eventName=null;
+        if(uuid.isEmpty()) uuid=null;
+
+        Long eventId=null;
+        if(eventName !=null && eventName.matches("-?\\d+"))
+        {
+            eventId= Long.parseLong(eventName);
+            eventName=null;
+        }
+        Long cid=null;
+        if(uuid !=null && uuid.matches("-?\\d+"))
+        {
+            cid= Long.parseLong(uuid);
+            uuid=null;
+        }
 
         Pageable p= PageRequest.of(pageNumber, pageSize);
-        List<Object> data= monitorRepository.CandidateMonitor(email,Client,eventName,eventId,startDate,endDate);
+        List<Object> data= monitorRepository.CandidateMonitor(email,Client,eventName,uuid,cid,eventId,startDate,endDate);
         int start = (int) p.getOffset();
         int end = Math.min((start + p.getPageSize()), data.size());
         Page<Object> monitorPage = new PageImpl<>(data.subList(start, end), p, data.size());
@@ -58,25 +73,106 @@ public class MonitorServiceImpl implements MonitorService {
                 dto.setEmail(rowData[6].toString());
             }
             if (rowData[7] != null) {
-                dto.setEventId((long) rowData[7].hashCode());
+                dto.setEventId(Long.parseLong(rowData[7].toString()));
             }
-            if (rowData[8] != null) {
-                dto.setId(Long.parseLong(rowData[8].toString()));
+
+            if (rowData[10] != null) {
+                dto.setEventName(rowData[10].toString());
             }
-            if (rowData[9] != null) {
-                dto.setEventName(rowData[9].toString());
+
+            if (rowData[13] != null) {
+                dto.setClientEmail(rowData[13].toString());
+            }
+
+            if (rowData[15] != null) {
+                dto.setStartDate(Long.parseLong(rowData[15].toString()));
+            }
+            if (rowData[16] != null) {
+                dto.setEndDate(Long.parseLong(rowData[16].toString()));
+            }
+            if (rowData[17] != null) {
+                dto.setStatus(rowData[17].toString());
+            }
+            if (rowData[18] != null) {
+                dto.setTaskName(rowData[18].toString());
+            }
+
+            ldto.add(dto);
+        }
+        CandidateMonitorDTO fdto= new CandidateMonitorDTO();
+        fdto.setPageNumber(pageNumber);
+        fdto.setTotalPage(monitorPage.getTotalPages());
+        fdto.setTotalElements(monitorPage.getTotalElements());
+        fdto.setMonitorDtoList(ldto);
+        return fdto;
+    }
+
+    @Override
+    public AssessorMonitorDto AssessorMonitorService(Integer pageNumber, Integer pageSize, String email, String Client, String eventName,String uuid, Long startDate, Long endDate)
+    {
+        if(email.isEmpty()) email=null;
+        if(Client.isEmpty()) Client=null;
+        if(eventName.isEmpty()) eventName=null;
+        if(uuid.isEmpty()) uuid=null;
+
+        Long eventId=null;
+        if(eventName !=null && eventName.matches("-?\\d+"))
+        {
+            eventId= Long.parseLong(eventName);
+            eventName=null;
+        }
+        Long cid=null;
+        if(uuid !=null && uuid.matches("-?\\d+"))
+        {
+            cid= Long.parseLong(uuid);
+            uuid=null;
+        }
+
+        Pageable p= PageRequest.of(pageNumber, pageSize);
+        List<Object> data= monitorRepository.AssessorMonitor(email,Client,eventName,uuid,cid,eventId,startDate,endDate);
+        int start = (int) p.getOffset();
+        int end = Math.min((start + p.getPageSize()), data.size());
+        Page<Object> monitorPage = new PageImpl<>(data.subList(start, end), p, data.size());
+        List<AssessorList> ldto= new ArrayList<>();
+        for (Object row : monitorPage) {
+            AssessorList dto = new AssessorList();
+            Object[] rowData = (Object[]) row;
+
+            if (rowData[4] != null) {
+                dto.setAssessorName(rowData[4].toString());
+            }
+            if (rowData[5] != null) {
+                dto.setAssessorEmail(rowData[5].toString());
             }
             if (rowData[10] != null) {
-                dto.setClientId(Long.parseLong(rowData[10].toString()));
-            }
-            if (rowData[11] != null) {
-                dto.setClientName(rowData[11].toString());
+                dto.setCandidateEmail(rowData[10].toString());
             }
             if (rowData[12] != null) {
                 dto.setClientEmail(rowData[12].toString());
             }
             if (rowData[13] != null) {
-                dto.setTaskId(Long.parseLong(rowData[13].toString()));
+                dto.setEventName(rowData[13].toString());
+            }
+            if (rowData[2] != null) {
+                dto.setEventId(Long.parseLong(rowData[2].toString()));
+            }
+            if (rowData[16] != null) {
+                dto.setTaskName(rowData[16].toString());
+            }
+            if (rowData[17] != null) {
+                dto.setTaskType(rowData[17].toString());
+            }
+
+            if (rowData[6] != null) {
+                dto.setStatus(rowData[6].toString());
+            }
+
+            if (rowData[18] != null) {
+                dto.setCid(Long.parseLong(rowData[18].toString()));
+            }
+
+            if (rowData[19] != null) {
+                dto.setInterviewId(rowData[19].toString());
             }
             if (rowData[14] != null) {
                 dto.setStartDate(Long.parseLong(rowData[14].toString()));
@@ -84,23 +180,14 @@ public class MonitorServiceImpl implements MonitorService {
             if (rowData[15] != null) {
                 dto.setEndDate(Long.parseLong(rowData[15].toString()));
             }
-            if (rowData[16] != null) {
-                dto.setStatus(rowData[16].toString());
-            }
-            if (rowData[17] != null) {
-                dto.setTaskName(rowData[17].toString());
-            }
-            if (rowData[18] != null) {
-                dto.setModeType(rowData[18].toString());
-            }
 
             ldto.add(dto);
         }
-        FinalMonitorDTO fdto= new FinalMonitorDTO();
+        AssessorMonitorDto fdto= new AssessorMonitorDto();
         fdto.setPageNumber(pageNumber);
         fdto.setTotalPage(monitorPage.getTotalPages());
         fdto.setTotalElements(monitorPage.getTotalElements());
-        fdto.setMonitorDtoList(ldto);
+        fdto.setAssessorDtoList(ldto);
         return fdto;
     }
 
