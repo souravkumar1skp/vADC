@@ -23,6 +23,7 @@ public class MonitorServiceImpl implements MonitorService {
     @Override
     public CandidateMonitorDTO CandidateMonitorService(Integer pageNumber, Integer pageSize, String email, String Client, String eventName,String uuid, Long startDate, Long endDate)
     {
+        System.out.println(Client);
         if(email.isEmpty()) email=null;
         if(Client.isEmpty()) Client=null;
         if(eventName.isEmpty()) eventName=null;

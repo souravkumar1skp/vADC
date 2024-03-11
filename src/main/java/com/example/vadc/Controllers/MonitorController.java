@@ -19,7 +19,7 @@ public class MonitorController {
     @GetMapping("/MonitorCandidate")
     public ResponseEntity<CandidateMonitorDTO> MonitorCandidate(@RequestParam(name = "pageNumber", defaultValue = "0") Integer pageNumber,
                                                                 @RequestParam(name = "email", required = false, defaultValue = "")String email,
-                                                                @RequestParam(name = "Client", required = false, defaultValue = "")String Client,
+                                                                @RequestParam(name = "clientEmail", required = false, defaultValue = "")String Client,
                                                                 @RequestParam(name = "eventName", required = false, defaultValue = "")String eventName,
                                                                 @RequestParam(name = "uuid", required = false, defaultValue = "")String uuid,
                                                                 @RequestParam(name = "startDate", required = false)Long startDate,

@@ -21,8 +21,8 @@ public interface MonitorRepository extends JpaRepository<EventMaster, Integer> {
             "select cm.id as candidate_id,ctm.task_type,ctm.cid, ctm.interview_cid, cm.first_name, cm.last_name, cm.email, ctm.event_id, ctm.task_id as tid from candidate_task_mapping as ctm inner join candidate_master as cm on ctm.candidate_id=cm.id\n" +
             ")\n" +
             "select * from cte3 inner join cte2 on cte3.event_id=cte2.id and cte3.tid= cte2.task_id where (:email IS NULL OR email ilike concat('%', :email, '%')) AND (:Client IS NULL OR client_email ilike concat('%', :Client, '%'))" +
-            "AND (:eventName IS NULL OR event_name ilike concat('%', :eventName, '%')) AND (:eventId IS NULL OR event_id = :eventId) AND (:startDate IS NULL OR start_date = :startDate) AND (:endDate IS NULL OR end_date = :endDate)" +
-            "AND (:uuid IS NULL OR interview_cid ilike concat('%', :uuid, '%')) AND (:cid IS NULL OR cid = :cid)", nativeQuery = true)
+            " AND (:eventName IS NULL OR event_name ilike concat('%', :eventName, '%')) AND (:eventId IS NULL OR event_id = :eventId) AND (:startDate IS NULL OR start_date = :startDate) AND (:endDate IS NULL OR end_date = :endDate)" +
+            " AND (:uuid IS NULL OR interview_cid ilike concat('%', :uuid, '%')) AND (:cid IS NULL OR cid = :cid)", nativeQuery = true)
     List<Object> CandidateMonitor(String email, String Client, String eventName,String uuid, Long cid, Long eventId, Long startDate, Long endDate);
 
     @Query(value = "with cte1 as (\n" +
