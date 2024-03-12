@@ -53,7 +53,6 @@ public class StatusServiceImpl implements StatusService {
     @Override
     public List<EventStatusDto> AssessorTaskStatusService(Long startDate, Long endDate)
     {
-        System.out.println(startDate+ " "+ endDate);
         Object data= emailRepository.getAssessorTaskStatus(startDate, endDate);
         EventStatusDto dto= new EventStatusDto();
         List<EventStatusDto> DtoList= new ArrayList<>();
@@ -66,5 +65,23 @@ public class StatusServiceImpl implements StatusService {
         dto_2.setValue(((Object[]) data)[1].hashCode());
         DtoList.add(dto_2);
         return DtoList;
+    }
+    @Override
+    public List<EventStatusDto> taskWiseStatusService(String type)
+    {
+        List<Object> data= emailRepository.getTaskWiseStatus(type);
+        List<EventStatusDto> dtoList= new ArrayList<>();
+        for(Object row: data)
+        {
+            Object status= ((Object[]) row)[0];
+            Object value= ((Object[]) row)[1];
+
+            EventStatusDto dto= new EventStatusDto();
+            dto.setStatus(status.toString());
+            dto.setValue(value.hashCode());
+
+            dtoList.add(dto);
+        }
+        return dtoList;
     }
 }

@@ -33,4 +33,10 @@ public class StatusController {
     {
         return emailServiceImpl.AssessorTaskStatusService(startDate, endDate);
     }
+
+    @GetMapping("/getTaskWiseStatus")
+    public List<EventStatusDto> getTaskWiseStatus(@RequestParam(name = "type", defaultValue = "ASSESSMENT") String type)
+    {
+        return emailServiceImpl.taskWiseStatusService(type);
+    }
 }

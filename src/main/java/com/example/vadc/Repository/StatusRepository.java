@@ -29,4 +29,7 @@ public interface StatusRepository extends JpaRepository<EventMaster, Integer> {
             "select * , (select count(*) from candidate_assessor_mapping WHERE created_on>= :startDate AND created_on<=:endDate) " +
             "as total from my_cte", nativeQuery = true)
     Object getAssessorTaskStatus(Long startDate, Long endDate);
+
+    @Query(value = "select task_status, count(*) from candidate_task_mapping where task_type ilike :type group by task_status", nativeQuery = true)
+    List<Object> getTaskWiseStatus(String type);
 }
