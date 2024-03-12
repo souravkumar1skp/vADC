@@ -65,9 +65,9 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public List<CandidateCountByMonthDto> getTaskCompletionStatusService()
+    public List<CandidateCountByMonthDto> getTaskCompletionStatusService(Long startDate, Long endDate)
     {
-        List<Object> data= eventRepository.getCountByMonth();
+        List<Object> data= eventRepository.getCountByMonth(startDate, endDate);
         List<CandidateCountByMonthDto> dtoList= new ArrayList<>();
         for(Object row: data)
         {

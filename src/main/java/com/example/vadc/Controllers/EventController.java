@@ -47,8 +47,8 @@ public class EventController {
     }
 
     @GetMapping("/getTaskStatus")
-    public List<CandidateCountByMonthDto> getTaskStatus()
+    public List<CandidateCountByMonthDto> getTaskStatus(@RequestParam(name = "startDate", defaultValue = "0") Long startDate, @RequestParam(name = "endDate", defaultValue = "" + Long.MAX_VALUE) Long endDate)
     {
-        return eventServiceImpl.getTaskCompletionStatusService();
+        return eventServiceImpl.getTaskCompletionStatusService(startDate, endDate);
     }
 }

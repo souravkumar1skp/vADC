@@ -12,5 +12,5 @@ public interface EventService {
      Integer getTotalClients(Long startDate, Long endDate);
      Integer getTotalCandidates(Long startDate, Long endDate);
      Integer getAssessorsCount(Long startDate, Long endDate);
-     List<CandidateCountByMonthDto> getTaskCompletionStatusService();
+     List<CandidateCountByMonthDto> getTaskCompletionStatusService(Long startDate, Long endDate);
 }
