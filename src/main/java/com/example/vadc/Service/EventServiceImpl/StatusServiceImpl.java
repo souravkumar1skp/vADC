@@ -1,11 +1,9 @@
 package com.example.vadc.Service.EventServiceImpl;
 
 import com.example.vadc.Dto.EmailDto;
-import com.example.vadc.Dto.EventDto;
 import com.example.vadc.Dto.EventStatusDto;
-import com.example.vadc.Model.EventMaster;
-import com.example.vadc.Repository.EmailRepository;
-import com.example.vadc.Service.EmailService;
+import com.example.vadc.Repository.StatusRepository;
+import com.example.vadc.Service.StatusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,15 +11,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class EmailServiceImpl implements EmailService {
+public class StatusServiceImpl implements StatusService {
     @Autowired
-    private EmailRepository emailRepository;
+    private StatusRepository emailRepository;
 
     @Override
     public List<EmailDto> getEmailStatus(Long startDate, Long endDate)
     {
         List<Object> data= emailRepository.getStatus(startDate, endDate);
-        List<EmailDto> ldto= new ArrayList<>();
+        List<EmailDto> DtoList= new ArrayList<>();
         for(Object row: data)
         {
             Object status= ((Object[]) row)[0];
@@ -31,41 +29,42 @@ public class EmailServiceImpl implements EmailService {
             dto.setStatus(status.toString());
             dto.setCount(value.hashCode());
 
-            ldto.add(dto);
+            DtoList.add(dto);
         }
-        return ldto;
+        return DtoList;
     }
     @Override
-    public List<EventStatusDto> CandidateTaskStatusService()
+    public List<EventStatusDto> CandidateTaskStatusService(Long startDate, Long endDate)
     {
-        Object data= emailRepository.getCandidateTaskStatus();
+        Object data= emailRepository.getCandidateTaskStatus(startDate, endDate);
         EventStatusDto dto= new EventStatusDto();
-        List<EventStatusDto> ldto= new ArrayList<>();
+        List<EventStatusDto> DtoList= new ArrayList<>();
         dto.setStatus("Completed");
         dto.setValue(((Object[]) data)[0].hashCode());
-        ldto.add(dto);
+        DtoList.add(dto);
 
         EventStatusDto dto_2= new EventStatusDto();
         dto_2.setStatus("Total");
         dto_2.setValue(((Object[]) data)[1].hashCode());
-        ldto.add(dto_2);
-        return ldto;
+        DtoList.add(dto_2);
+        return DtoList;
     }
 
     @Override
     public List<EventStatusDto> AssessorTaskStatusService(Long startDate, Long endDate)
     {
+        System.out.println(startDate+ " "+ endDate);
         Object data= emailRepository.getAssessorTaskStatus(startDate, endDate);
         EventStatusDto dto= new EventStatusDto();
-        List<EventStatusDto> ldto= new ArrayList<>();
+        List<EventStatusDto> DtoList= new ArrayList<>();
         dto.setStatus("Completed");
         dto.setValue(((Object[]) data)[0].hashCode());
-        ldto.add(dto);
+        DtoList.add(dto);
 
         EventStatusDto dto_2= new EventStatusDto();
         dto_2.setStatus("Total");
         dto_2.setValue(((Object[]) data)[1].hashCode());
-        ldto.add(dto_2);
-        return ldto;
+        DtoList.add(dto_2);
+        return DtoList;
     }
 }

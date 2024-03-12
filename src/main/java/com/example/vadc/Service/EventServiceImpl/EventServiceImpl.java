@@ -27,21 +27,25 @@ public class EventServiceImpl implements EventService {
     public List<EventStatusDto> getEventStatusService(Long startDate, Long endDate)
     {
         List<Object> data= eventRepository.getStatus(startDate, endDate);
-        List<EventStatusDto> ldto= new ArrayList<>();
+        List<EventStatusDto> dtoList= new ArrayList<>();
         for(Object row: data)
         {
             Object status= ((Object[]) row)[0];
             Object value= ((Object[]) row)[1];
+
             EventStatusDto dto= new EventStatusDto();
             if (status.toString().equals("FINISHED")) {
                 dto.setStatus("COMPLETED");
             }
             else
-            dto.setStatus(status.toString());
+            {
+                dto.setStatus(status.toString());
+            }
             dto.setValue(value.hashCode());
-            ldto.add(dto);
+
+            dtoList.add(dto);
         }
-        return ldto;
+        return dtoList;
     }
     @Override
     public Integer getTotalClients(Long startDate, Long endDate)
@@ -63,16 +67,18 @@ public class EventServiceImpl implements EventService {
     public List<EventStatusDto> getTaskCompletionStatusService()
     {
         List<Object> data= eventRepository.getCountByMonth();
-        List<EventStatusDto> ldto= new ArrayList<>();
+        List<EventStatusDto> dtoList= new ArrayList<>();
         for(Object row: data)
         {
             Object status= ((Object[]) row)[0];
             Object value= ((Object[]) row)[1];
+
             EventStatusDto dto= new EventStatusDto();
-            dto.setStatus(status.toString());
+            dto.setStatus(status.toString().substring(0,3));
             dto.setValue(value.hashCode());
-            ldto.add(dto);
+
+            dtoList.add(dto);
         }
-        return ldto;
+        return dtoList;
     }
 }

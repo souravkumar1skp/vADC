@@ -23,12 +23,13 @@ public class MonitorServiceImpl implements MonitorService {
     @Override
     public CandidateMonitorDTO CandidateMonitorService(Integer pageNumber, Integer pageSize, String email, String Client, String eventName,String uuid, Long startDate, Long endDate)
     {
-        System.out.println(Client);
+        //making empty string values null
         if(email.isEmpty()) email=null;
         if(Client.isEmpty()) Client=null;
         if(eventName.isEmpty()) eventName=null;
         if(uuid.isEmpty()) uuid=null;
 
+        //regex to match if eventName is eventId or Not by getting if its All Number or not
         Long eventId=null;
         if(eventName !=null && eventName.matches("-?\\d+"))
         {
@@ -44,10 +45,12 @@ public class MonitorServiceImpl implements MonitorService {
 
         Pageable p= PageRequest.of(pageNumber, pageSize);
         List<Object> data= monitorRepository.CandidateMonitor(email,Client,eventName,uuid,cid,eventId,startDate,endDate);
+
+        //getting all data then setting it into pageable as Page dont work with CTE's correctly
         int start = (int) p.getOffset();
         int end = Math.min((start + p.getPageSize()), data.size());
         Page<Object> monitorPage = new PageImpl<>(data.subList(start, end), p, data.size());
-        List<MonitorDto> ldto= new ArrayList<>();
+        List<MonitorDto> DtoList= new ArrayList<>();
         for (Object row : monitorPage) {
             MonitorDto dto = new MonitorDto();
             Object[] rowData = (Object[]) row;
@@ -98,14 +101,14 @@ public class MonitorServiceImpl implements MonitorService {
                 dto.setTaskName(rowData[18].toString());
             }
 
-            ldto.add(dto);
+            DtoList.add(dto);
         }
-        CandidateMonitorDTO fdto= new CandidateMonitorDTO();
-        fdto.setPageNumber(pageNumber);
-        fdto.setTotalPage(monitorPage.getTotalPages());
-        fdto.setTotalElements(monitorPage.getTotalElements());
-        fdto.setMonitorDtoList(ldto);
-        return fdto;
+        CandidateMonitorDTO finalDto= new CandidateMonitorDTO();
+        finalDto.setPageNumber(pageNumber);
+        finalDto.setTotalPage(monitorPage.getTotalPages());
+        finalDto.setTotalElements(monitorPage.getTotalElements());
+        finalDto.setMonitorDtoList(DtoList);
+        return finalDto;
     }
 
     @Override
@@ -134,7 +137,7 @@ public class MonitorServiceImpl implements MonitorService {
         int start = (int) p.getOffset();
         int end = Math.min((start + p.getPageSize()), data.size());
         Page<Object> monitorPage = new PageImpl<>(data.subList(start, end), p, data.size());
-        List<AssessorList> ldto= new ArrayList<>();
+        List<AssessorList> DtoList= new ArrayList<>();
         for (Object row : monitorPage) {
             AssessorList dto = new AssessorList();
             Object[] rowData = (Object[]) row;
@@ -182,14 +185,14 @@ public class MonitorServiceImpl implements MonitorService {
                 dto.setEndDate(Long.parseLong(rowData[15].toString()));
             }
 
-            ldto.add(dto);
+            DtoList.add(dto);
         }
-        AssessorMonitorDto fdto= new AssessorMonitorDto();
-        fdto.setPageNumber(pageNumber);
-        fdto.setTotalPage(monitorPage.getTotalPages());
-        fdto.setTotalElements(monitorPage.getTotalElements());
-        fdto.setAssessorDtoList(ldto);
-        return fdto;
+        AssessorMonitorDto finalDto= new AssessorMonitorDto();
+        finalDto.setPageNumber(pageNumber);
+        finalDto.setTotalPage(monitorPage.getTotalPages());
+        finalDto.setTotalElements(monitorPage.getTotalElements());
+        finalDto.setAssessorDtoList(DtoList);
+        return finalDto;
     }
 
 }
