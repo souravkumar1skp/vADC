@@ -3,7 +3,8 @@ package com.example.vadc.Dto;
 import lombok.Data;
 
 @Data
-public class EmailDto {
+public class CandidateCountByMonthDto {
     private String status;
     private Integer count;
+    private Integer candidate_count;
 }

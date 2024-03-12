@@ -1,6 +1,5 @@
 package com.example.vadc.Controllers;
 
-import com.example.vadc.Dto.EmailDto;
 import com.example.vadc.Dto.EventStatusDto;
 import com.example.vadc.Service.EventServiceImpl.StatusServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,7 @@ public class StatusController {
     private StatusServiceImpl emailServiceImpl;
 
     @GetMapping("/getEmailStatus")
-    public List<EmailDto> getEmailStatus(@RequestParam(name = "startDate", defaultValue = "0") Long startDate, @RequestParam(name = "endDate", defaultValue = "" + Long.MAX_VALUE) Long endDate)
+    public List<EventStatusDto> getEmailStatus(@RequestParam(name = "startDate", defaultValue = "0") Long startDate, @RequestParam(name = "endDate", defaultValue = "" + Long.MAX_VALUE) Long endDate)
     {
         return emailServiceImpl.getEmailStatus(startDate, endDate);
     }

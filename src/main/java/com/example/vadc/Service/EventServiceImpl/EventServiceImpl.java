@@ -1,5 +1,6 @@
 package com.example.vadc.Service.EventServiceImpl;
 
+import com.example.vadc.Dto.CandidateCountByMonthDto;
 import com.example.vadc.Dto.EventDto;
 import com.example.vadc.Dto.EventStatusDto;
 import com.example.vadc.Repository.EventRepository;
@@ -64,18 +65,20 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public List<EventStatusDto> getTaskCompletionStatusService()
+    public List<CandidateCountByMonthDto> getTaskCompletionStatusService()
     {
         List<Object> data= eventRepository.getCountByMonth();
-        List<EventStatusDto> dtoList= new ArrayList<>();
+        List<CandidateCountByMonthDto> dtoList= new ArrayList<>();
         for(Object row: data)
         {
             Object status= ((Object[]) row)[0];
-            Object value= ((Object[]) row)[1];
+            Object candidate_value= ((Object[]) row)[1];
+            Object value= ((Object[]) row)[2];
 
-            EventStatusDto dto= new EventStatusDto();
+            CandidateCountByMonthDto dto= new CandidateCountByMonthDto();
             dto.setStatus(status.toString().substring(0,3));
-            dto.setValue(value.hashCode());
+            dto.setCandidate_count(candidate_value.hashCode());
+            dto.setCount(value.hashCode());
 
             dtoList.add(dto);
         }

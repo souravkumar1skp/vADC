@@ -1,5 +1,6 @@
 package com.example.vadc.Service;
 
+import com.example.vadc.Dto.CandidateCountByMonthDto;
 import com.example.vadc.Dto.EventDto;
 import com.example.vadc.Dto.EventStatusDto;
 
@@ -11,5 +12,5 @@ public interface EventService {
      Integer getTotalClients(Long startDate, Long endDate);
      Integer getTotalCandidates(Long startDate, Long endDate);
      Integer getAssessorsCount(Long startDate, Long endDate);
-     List<EventStatusDto> getTaskCompletionStatusService();
+     List<CandidateCountByMonthDto> getTaskCompletionStatusService();
 }

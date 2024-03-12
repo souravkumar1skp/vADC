@@ -1,5 +1,6 @@
 package com.example.vadc.Controllers;
 
+import com.example.vadc.Dto.CandidateCountByMonthDto;
 import com.example.vadc.Dto.EventDto;
 import com.example.vadc.Dto.EventStatusDto;
 import com.example.vadc.Service.EventServiceImpl.EventServiceImpl;
@@ -46,7 +47,7 @@ public class EventController {
     }
 
     @GetMapping("/getTaskStatus")
-    public List<EventStatusDto> getTaskStatus()
+    public List<CandidateCountByMonthDto> getTaskStatus()
     {
         return eventServiceImpl.getTaskCompletionStatusService();
     }

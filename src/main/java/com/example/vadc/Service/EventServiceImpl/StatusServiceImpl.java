@@ -1,6 +1,5 @@
 package com.example.vadc.Service.EventServiceImpl;
 
-import com.example.vadc.Dto.EmailDto;
 import com.example.vadc.Dto.EventStatusDto;
 import com.example.vadc.Repository.StatusRepository;
 import com.example.vadc.Service.StatusService;
@@ -16,18 +15,18 @@ public class StatusServiceImpl implements StatusService {
     private StatusRepository emailRepository;
 
     @Override
-    public List<EmailDto> getEmailStatus(Long startDate, Long endDate)
+    public List<EventStatusDto> getEmailStatus(Long startDate, Long endDate)
     {
         List<Object> data= emailRepository.getStatus(startDate, endDate);
-        List<EmailDto> DtoList= new ArrayList<>();
+        List<EventStatusDto> DtoList= new ArrayList<>();
         for(Object row: data)
         {
             Object status= ((Object[]) row)[0];
             Object value= ((Object[]) row)[1];
-            EmailDto dto= new EmailDto();
+            EventStatusDto dto= new EventStatusDto();
 
             dto.setStatus(status.toString());
-            dto.setCount(value.hashCode());
+            dto.setValue(value.hashCode());
 
             DtoList.add(dto);
         }
