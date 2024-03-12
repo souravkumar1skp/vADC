@@ -6,6 +6,7 @@ import com.example.vadc.Dto.CandidateMonitorDTO;
 import com.example.vadc.Dto.MonitorDto;
 import com.example.vadc.Repository.MonitorRepository;
 import com.example.vadc.Service.MonitorService;
+import com.example.vadc.exception.WrongPageNumberRequested;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -23,6 +24,11 @@ public class MonitorServiceImpl implements MonitorService {
     @Override
     public CandidateMonitorDTO CandidateMonitorService(Integer pageNumber, Integer pageSize, String email, String Client, String eventName,String uuid, Long startDate, Long endDate)
     {
+        if(pageNumber<0)
+        {
+            throw new WrongPageNumberRequested("PageNumber Should be greater than or Equal 0");
+        }
+
         //making empty string values null
         if(email.isEmpty()) email=null;
         if(Client.isEmpty()) Client=null;
@@ -114,6 +120,11 @@ public class MonitorServiceImpl implements MonitorService {
     @Override
     public AssessorMonitorDto AssessorMonitorService(Integer pageNumber, Integer pageSize, String email, String Client, String eventName,String uuid, Long startDate, Long endDate)
     {
+        if(pageNumber<0)
+        {
+            throw new WrongPageNumberRequested("PageNumber Should be greater than or Equal 0");
+        }
+
         if(email.isEmpty()) email=null;
         if(Client.isEmpty()) Client=null;
         if(eventName.isEmpty()) eventName=null;
